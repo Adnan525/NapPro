@@ -1,5 +1,6 @@
 package com.ad.nappro;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
@@ -10,8 +11,10 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextClock;
 import android.widget.Toast;
-import java.util.Calendar;
-import java.util.Date;
+
+import static com.ad.nappro.Operations.*;
+
+import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -33,12 +36,14 @@ public class MainActivity extends AppCompatActivity {
         button15.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Calendar calendar = Calendar.getInstance();
-                calendar.setTime(new Date());
-                calendar.add(Calendar.MINUTE, 1);
-                long target = calendar.getTimeInMillis();
-                setAlarm(target);
-                System.out.println(calendar);
+                ArrayList<Long> alarmList = addMin(15);
+                setAlarms(alarmList);
+//                Calendar calendar = Calendar.getInstance();
+//                calendar.setTime(new Date());
+//                calendar.add(Calendar.MINUTE, 1);
+//                long target = calendar.getTimeInMillis();
+//                setAlarm(target);
+//                System.out.println(calendar);
 
             }
         });
@@ -87,13 +92,21 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    private void setAlarm(long time) {
+    private void setAlarm(long time, int reqCode) {
         AlarmManager manager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
 
         Intent i = new Intent(this, BroadCastManager.class);
-        PendingIntent pi = PendingIntent.getBroadcast(this, 0, i, 0);
+        PendingIntent pi = PendingIntent.getBroadcast(this, reqCode, i, 0);
         manager.set(AlarmManager.RTC_WAKEUP, time, pi);
 
-        Toast.makeText(this, "Alarm is set", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "Alarm is set at "+time, Toast.LENGTH_SHORT).show();
+    }
+
+    private void setAlarms(@NonNull ArrayList<Long> alarmList)
+    {
+        for(int i = 0; i<alarmList.size(); i++)
+        {
+            setAlarm(alarmList.get(i), i);
+        }
     }
 }
