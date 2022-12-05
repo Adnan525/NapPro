@@ -16,7 +16,8 @@ import androidx.core.app.NotificationManagerCompat;
 public class BroadCastManager extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
-
+        // uniform resource identifier
+        // used to locate abstract or physical resource
         Uri alert = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_ALARM);
 
         if(alert == null){

@@ -32,12 +32,41 @@
             android:text="hello"
             android:textSize="30dp" />
 
-
         <Button
-            android:id="@+id/buttonAdd"
+            android:id="@+id/button15Min"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="add hour" />
+            android:text="15 mins" />
+        <Button
+            android:id="@+id/button30Min"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="30 mins" />
+        <Button
+            android:id="@+id/button45Min"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="45 mins" />
+        <Button
+            android:id="@+id/button1Hr"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="1 hour" />
+        <Button
+            android:id="@+id/button2Hr"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="2 hours" />
+        <Button
+            android:id="@+id/button6Hr"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="6 hours" />
+        <Button
+            android:id="@+id/button8Hr"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="8 hours" />
 
     </LinearLayout>
 </RelativeLayout>
