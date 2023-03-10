@@ -39,12 +39,15 @@ public class Operations {
     static ArrayList<Long> napPro(LocalDateTime lt)
     {
 //        Integer[] napPro = {0, 2, 4, 5, 7, 10};
-        Integer[] napPro = {0, 1, 2};
+        Integer[] napPro = {0, 2, 5};
         ArrayList<Long> napProList = new ArrayList<>();
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            for(int i = 0; i<2; i++)
+            for(int i = 0; i<napPro.length; i++)
             {
                 LocalDateTime temp = lt.plusMinutes(napPro[i]);
+                System.out.println("=============================");
+                System.out.println(temp.toString());
+                System.out.println("=============================");
                 ZonedDateTime zdt = ZonedDateTime.of(temp, ZoneId.systemDefault());
                 Long alarm = zdt.toInstant().toEpochMilli();
                 napProList.add(alarm);

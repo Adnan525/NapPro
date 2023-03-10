@@ -20,13 +20,6 @@ public class AlarmScreen extends AppCompatActivity {
         setContentView(R.layout.activity_alarm_screen);
 
         stopButton = (Button) findViewById(R.id.stopButton);
-        stopButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                finish();
-            }
-        });
-
         // uniform resource identifier
         // used to locate abstract or physical resource
         Uri alert = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_ALARM);
@@ -54,5 +47,13 @@ public class AlarmScreen extends AppCompatActivity {
 //        NotificationManagerCompat notificationManagerCompat = NotificationManagerCompat.from(context);
 //        notificationManagerCompat.notify(111, builder.build());
         Toast.makeText(getApplicationContext(), "Alarm has triggered", Toast.LENGTH_SHORT).show();
+        stopButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mp.stop();
+                finish();
+
+            }
+        });
     }
 }
