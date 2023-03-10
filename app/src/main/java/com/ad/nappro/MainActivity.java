@@ -36,15 +36,8 @@ public class MainActivity extends AppCompatActivity {
         button15.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ArrayList<Long> alarmList = addMin(15);
+                ArrayList<Long> alarmList = addMin(1);
                 setAlarms(alarmList);
-//                Calendar calendar = Calendar.getInstance();
-//                calendar.setTime(new Date());
-//                calendar.add(Calendar.MINUTE, 1);
-//                long target = calendar.getTimeInMillis();
-//                setAlarm(target);
-//                System.out.println(calendar);
-
             }
         });
 
@@ -91,22 +84,25 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-
-    private void setAlarm(long time, int reqCode) {
-        AlarmManager manager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
-
-        Intent i = new Intent(this, BroadCastManager.class);
-        PendingIntent pi = PendingIntent.getBroadcast(this, reqCode, i, 0);
-        manager.set(AlarmManager.RTC_WAKEUP, time, pi);
-
-        Toast.makeText(this, "Alarm is set at "+time, Toast.LENGTH_SHORT).show();
-    }
-
+    // just goes through the alarmList from napPro and sets alarm using setAlarm()
     private void setAlarms(@NonNull ArrayList<Long> alarmList)
     {
         for(int i = 0; i<alarmList.size(); i++)
         {
+            // passing index value so it will get new reqCode for each alarm
+            // so it will set a new alarm
             setAlarm(alarmList.get(i), i);
         }
+    }
+
+    // broadcast to alarm manager for each alarm
+    // new reqCode for each alarm
+    private void setAlarm(long time, int reqCode) {
+        AlarmManager manager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+        Intent i = new Intent(this, BroadCastManager.class);
+        PendingIntent pi = PendingIntent.getBroadcast(this, reqCode, i, 0);
+        manager.set(AlarmManager.RTC_WAKEUP, time, pi);
+//        Toast.makeText(this, "Alarm is set at "+time, Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "Alarm is set", Toast.LENGTH_SHORT).show();
     }
 }

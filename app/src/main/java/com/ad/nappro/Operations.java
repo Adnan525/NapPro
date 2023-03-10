@@ -8,13 +8,18 @@ import java.util.ArrayList;
 
 
 public class Operations {
+
+    // adds specifid min to current time
+    // target is our actual alarm time
+    // calls napPro function to add napPro mins to target time
+    // returns an arraylist of epoch times (long)
     static ArrayList<Long> addMin(Integer min)
     {
         ArrayList<Long> alarmList = new ArrayList<>();
         LocalDateTime current, target;
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
             current = LocalDateTime.now();
-            target = current.plusMinutes(1);
+            target = current.plusMinutes(min);
             alarmList = napPro(target);
         }
         return alarmList;
@@ -28,11 +33,13 @@ public class Operations {
         }
     }
 
+    // add napPro mins to target time
+    // convert yto epoch time epoch milli
+    //returns an arraylist of epoch times (long)
     static ArrayList<Long> napPro(LocalDateTime lt)
     {
-//        Integer[] napPro = {-5, 0, 2, 4, 5, 7, 10};
-        // test
-        Integer[] napPro = {0, 1};
+//        Integer[] napPro = {0, 2, 4, 5, 7, 10};
+        Integer[] napPro = {0, 1, 2};
         ArrayList<Long> napProList = new ArrayList<>();
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             for(int i = 0; i<2; i++)
